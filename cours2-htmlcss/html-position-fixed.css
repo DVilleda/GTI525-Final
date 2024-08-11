@@ -1,0 +1,33 @@
+.container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ccc;
+}
+
+.box {
+    position: fixed; /* Le positionnement des éléments à l'intérieur sera indépendant de cette boîte, et du défilement */
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    line-height: 100px;
+}
+
+.box1 {
+    top: 0;
+    left: 0;
+}
+
+.box2 {
+    bottom: 0;
+    right: 0;
+}
+
+.box3 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e74c3c;
+}

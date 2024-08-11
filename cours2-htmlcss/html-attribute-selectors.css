@@ -1,0 +1,29 @@
+/* Style pour la présence d'un attribut */
+[class] {
+    background-color: yellow;
+}
+
+/* Style pour la valeur exacte d'un attribut */
+a[target="_blank"] {
+    color: red;
+}
+
+/* Style pour la valeur d'un attribut qui commence par une chaîne */
+a[href^="https"] {
+    font-weight: bold;
+}
+
+/* Style pour la valeur d'un attribut qui se termine par une chaîne */
+img[src$=".png"] {
+    border: 2px solid #000;
+}
+
+/* Style pour la valeur d'un attribut qui contient une chaîne */
+a[href*="etsmtl"] {
+    text-decoration: underline;
+}
+
+/* Ignorer la casse */
+.example-link[href$=".CA" i] {
+    font-style: italic;
+}

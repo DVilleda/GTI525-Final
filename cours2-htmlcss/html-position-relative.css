@@ -1,0 +1,32 @@
+.container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ccc;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    line-height: 100px;
+}
+
+.box1 {
+    position: relative; /* Aucun changement ici */
+}
+
+.box2 {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.box3 {
+    position: relative;
+    top: -10px;
+    left: -10px;
+    background-color: #e74c3c;
+}

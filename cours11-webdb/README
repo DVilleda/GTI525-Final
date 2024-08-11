@@ -1,0 +1,108 @@
+1. Run mongod on localhost from the mongodb install directory (on mac, you may need to use sudo)
+
+2. Run mongoimport from a separate terminal in the same directory as the datasets as follows:
+
+A- Without docker
+
+mongoimport --db test --collection restaurants --file ./dataset.json
+mongoimport --db test --collection users --file ./dataset_users.json
+
+B- With docker
+
+Note: if using docker (assuming container name is 'mongo'), you first need to copy these files into the docker container *in root* (sudo/ sudo su); e.g.:
+docker cp dataset.json mongo:/tmp/
+docker cp dataset_users.json mongo:/tmp/
+
+Then import from /tmp/dataset.json or /tmp/dataset_users.json
+
+docker exec -it mongo mongoimport --db test --collection restaurants --file /tmp/dataset.json
+
+docker exec -it mongo mongoimport --db test --collection users --file /tmp/dataset_users.json
+
+
+3. Now start the mongo shell as follows in a terminal
+
+mongo
+(without docker)
+
+docker exec -it mongo mongosh
+(with docker, in root)
+
+You should see the prompt. Inside the mongo shell type the following:
+
+A. show dbs
+
+You should see the test database listed
+
+B. use test
+
+You should see the message "switched to database test"
+
+C. insert a restaurant as follows
+
+db.restaurants.insert(
+   {
+      "address" : {
+         "street" : "2 Avenue",
+         "zipcode" : "10075",
+         "building" : "1480",
+         "coord" : [ -73.9557413, 40.7720266 ]
+      },
+      "borough" : "Manhattan",
+      "cuisine" : "Italian",
+      "grades" : [
+         {
+            "date" : ISODate("2014-10-01T00:00:00Z"),
+            "grade" : "A",
+            "score" : 11
+         },
+         {
+            "date" : ISODate("2014-01-16T00:00:00Z"),
+            "grade" : "B",
+            "score" : 17
+         }
+      ],
+      "name" : "Vella",
+      "restaurant_id" : "41704620"
+   }
+)
+
+You should see a message like "{nInserted : 1}"
+
+D. List all the restaurants by typing
+
+db.restaurants.find()
+
+and type "it" to scroll the list
+
+E. To find a particular restaurant type
+
+db.restaurants.find( {"grades.score":{ $gt: 30 } } )
+
+E. Remove all restaurants in the Manhattan borough
+
+db.restaurants.find( {"borough":"Manhattan"} )
+db.restaurants.remove( {"borough":"Manhattan"} )
+
+should return WriteResult({ "nRemoved" : 10260 })
+
+F. Update a particular record
+
+db.restaurants.update( {"cuisine": "Pizza"}, { $set: {"cuisine" : "American(New)"} } )
+
+You should see a message like
+
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+G. To update all records type:
+
+db.restaurants.update( {"cuisine": "Pizza"}, { $set: {"cuisine" : "American(New)"}}, {multi:true} )
+
+you should see a message like 
+
+WriteResult({ "nMatched" : 1647, "nUpserted" : 0, "nModified" : 1647 })
+
+H. To perform a forEach operation
+
+db.restaurants.find().forEach( function(Object) { if (Object.grades.length > 1) printjson(Object.grades) } )
+

@@ -1,0 +1,40 @@
+<!-- Source: ChatGPT. Prompt: "Write a HTML page that includes a JavaScript that performs the following. The script parses the URL to extract a parameter called loadscript. It then dynamically loads the JavaScript file specified by the loadscript parameter by injecting a new script tag." -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Script Loading</title>
+  <script defer>
+    // Function to parse the URL and extract the value of a parameter
+    function getParameterByName(name, url) {
+      if (!url) {
+        url = window.location.href;
+      }
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    // Function to dynamically load a script by injecting a new script tag
+    function loadScript(scriptUrl) {
+      var script = document.createElement('script');
+      script.src = scriptUrl;
+      document.head.appendChild(script);
+    }
+
+    // Get the value of the loadscript parameter from the URL
+    var loadscriptParam = getParameterByName('loadscript');
+
+    // Load the script if the loadscript parameter is present
+    if (loadscriptParam) {
+      loadScript(loadscriptParam);
+    }
+  </script>
+</head>
+<body>
+  <!-- Your HTML content goes here -->
+</body>
+</html>
