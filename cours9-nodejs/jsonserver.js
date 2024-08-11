@@ -17,7 +17,7 @@ var serveRequest = function(request, response) {
 	console.log( "Reçu: " + request.url );
 
 	var arr = {};
-	for (int i=0; i<30; i++) {
+	for (let i=0; i<30; i++) {
 	    var key = Math.floor(Math.random() * 30);
 	    var rand = Math.floor(Math.random() * 5);
 	    var image = imagesPath + images[rand];
