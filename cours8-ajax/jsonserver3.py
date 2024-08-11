@@ -20,6 +20,8 @@ class MyRequestHandler(http.server.SimpleHTTPRequestHandler):
 			self.send_response(200)
 
 			self.send_header('Content-type','application/json')
+			#permettre cross origin request
+			self.send_header('Access-Control-Allow-Origin','*')
 			self.end_headers()
 
 			count = random.randint(1, 30)

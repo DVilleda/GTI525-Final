@@ -4,7 +4,7 @@ function AJAXRequest() {
     var url = "http://localhost:8090/ajax";
 
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/ajax");
+    xhr.open("GET", url);
     xhr.onload = function() {
 	if (xhr.status==200) {
 	    if ( xhr.getResponseHeader("Content-Type").startsWith("application/json")) {  
