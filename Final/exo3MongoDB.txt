@@ -1,0 +1,20 @@
+P1
+//Solution
+db.exo3.find({name:"Tim Hortons"}).forEach((resto)=>
+{
+    print(resto.name+": "+resto.address.building+" "+resto.address.street+" "+resto.address.zipcode);
+    db.exo3.find({"address.zipcode":resto.address.zipcode}).forEach((match)=>{
+        print(match.name+": "+match.address.building+" "+match.address.street+" "+match.address.zipcode);
+    }); 
+}
+);
+
+P2
+// Solution:
+db.restaurants.updateMany( {
+"borough": "Queens",
+"restaurant_id": {$gt, "42000000"},
+"cuisine": "Not Listed/Not Applicable"
+}, {
+$set: {"cuisine": "Pizza"}
+})
